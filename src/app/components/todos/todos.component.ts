@@ -9,6 +9,7 @@ import { Todo } from 'src/app/models/Todo';
 export class TodosComponent implements OnInit {
   
   todos!: Todo[];
+  inputTodo:string="";
 
  
 
@@ -21,11 +22,39 @@ export class TodosComponent implements OnInit {
         completed: false
       },
         {
-        content: 'second toso',
+        content: 'second todo',
+        completed: false
+      },
+      {
+        content: '3 todo',
+        completed: true
+      },
+        {
+        content: '4 todo',
         completed: true
       }
-
     ]
+  }
+
+  toggleDone (id: number) {
+    this.todos.map((v, i) => {
+      if(i == id) v.completed = !v.completed;
+      return v;
+    })
+
+  }
+
+  deleteTodo(id: number) {
+    this.todos = this.todos.filter((v, i) => i !== id);
+
+  }
+
+  addTodo() {
+    this.todos.push({
+      content: this.inputTodo,
+      completed: false
+    });
+    this.inputTodo = "";
   }
 
 }
